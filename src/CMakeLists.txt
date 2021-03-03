@@ -24,8 +24,9 @@ set(GPURAKU_INCLUDE_DIRS ../include ./include)
 # Set the c++ library.
 set(CPP_LIBRARY stdc++)
 # ## Dependencies - CUDA library required.
-SET(CUDA_SEPARABLE_COMPILATION ON)
 find_package( CUDA REQUIRED )
+SET(CUDA_SEPARABLE_COMPILATION ON)
+
 # ## Dependencies - OpenMP library required.
 FIND_PACKAGE( OpenMP REQUIRED)  
 
