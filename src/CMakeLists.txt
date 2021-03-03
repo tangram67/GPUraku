@@ -56,6 +56,7 @@ endif()
 
 
 ## NVCC (CUDA compiler) options
+set( CMAKE_CXX_FLAGS -D_FORCE_INLINES -arch compute_50 -rdc=true )
 set( CUDA_NVCC_FLAGS_DEBUG -g -G -O0 )
 set( CUDA_NVCC_FLAGS_RELEASE -O3 -lineinfo )
 
