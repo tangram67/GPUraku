@@ -25,6 +25,8 @@ set(GPURAKU_INCLUDE_DIRS ../include ./include)
 set(CPP_LIBRARY stdc++)
 # ## Dependencies - CUDA library required.
 find_package( CUDA REQUIRED )
+
+# Remove or comment out the following line on Ubuntu 16.04
 SET(CUDA_SEPARABLE_COMPILATION ON)
 
 # ## Dependencies - OpenMP library required.
@@ -59,6 +61,8 @@ endif()
 
 ## NVCC (CUDA compiler) options
 set( CMAKE_CXX_FLAGS -D_FORCE_INLINES )
+
+# Remove -arch compute_50 -rdc=true on Ubuntu 16.04
 set( CUDA_NVCC_FLAGS_DEBUG -g -G -O0 -arch compute_50 -rdc=true )
 set( CUDA_NVCC_FLAGS_RELEASE -O3 -lineinfo -arch compute_50 -rdc=true )
 
