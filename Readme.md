@@ -1,7 +1,7 @@
 # GPUraku Drei Mk.X
 Copyright (C) 2017-2018 Haolei Ye and Eric McCreath
 
-Forked for backward compatibility on the following Ubuntu versions:
+Forked from https://github.com/Harinlen/GPUraku for backward compatibility on the following Ubuntu versions:
 * Ubuntu 16.04, gcc 5.4.0, nvcc 7.5 (packet manager version), driver version 418.56 (packet manager version)
 * Ubuntu 18.04, gcc 7.5.0, nvcc 11.0 (manually installed with cuda_11.0.3_450.51.06_linux.run), driver version 450.102.04 (packet manager version)
 
