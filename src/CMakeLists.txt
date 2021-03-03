@@ -59,7 +59,7 @@ if(NOT CUDA_VERSION)
   set(CUDA_VERSION ${CMAKE_CUDA_COMPILER_VERSION})
 endif()
 
-# Remove -arch compute_50 -rdc=true on Ubuntu 16.04
+## NVCC (CUDA compiler) options
 if (CUDA_VERSION VERSION_LESS 8.0)
   set( CMAKE_CXX_FLAGS -D_FORCE_INLINES )
   set( CUDA_NVCC_FLAGS_DEBUG -g -G -O0 )
