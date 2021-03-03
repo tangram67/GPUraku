@@ -24,6 +24,7 @@ set(GPURAKU_INCLUDE_DIRS ../include ./include)
 # Set the c++ library.
 set(CPP_LIBRARY stdc++)
 # ## Dependencies - CUDA library required.
+SET(CUDA_SEPARABLE_COMPILATION ON)
 find_package( CUDA REQUIRED )
 # ## Dependencies - OpenMP library required.
 FIND_PACKAGE( OpenMP REQUIRED)  
@@ -56,9 +57,9 @@ endif()
 
 
 ## NVCC (CUDA compiler) options
-set( CMAKE_CXX_FLAGS -D_FORCE_INLINES -arch compute_50 -rdc=true )
-set( CUDA_NVCC_FLAGS_DEBUG -g -G -O0 )
-set( CUDA_NVCC_FLAGS_RELEASE -O3 -lineinfo )
+set( CMAKE_CXX_FLAGS -D_FORCE_INLINES )
+set( CUDA_NVCC_FLAGS_DEBUG -g -G -O0 -arch compute_50 -rdc=true )
+set( CUDA_NVCC_FLAGS_RELEASE -O3 -lineinfo -arch compute_50 -rdc=true )
 
 
 ## 1. Compile...
