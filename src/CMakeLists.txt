@@ -25,10 +25,6 @@ set(GPURAKU_INCLUDE_DIRS ../include ./include)
 set(CPP_LIBRARY stdc++)
 # ## Dependencies - CUDA library required.
 find_package( CUDA REQUIRED )
-
-# Remove or comment out the following line on Ubuntu 16.04
-SET(CUDA_SEPARABLE_COMPILATION ON)
-
 # ## Dependencies - OpenMP library required.
 FIND_PACKAGE( OpenMP REQUIRED)  
 
@@ -58,14 +54,21 @@ if(OPENMP_FOUND)
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
 endif()  
 
-
-## NVCC (CUDA compiler) options
-set( CMAKE_CXX_FLAGS -D_FORCE_INLINES )
+## Get NVCC (CUDA compiler) version
+if(NOT CUDA_VERSION)
+  set(CUDA_VERSION ${CMAKE_CUDA_COMPILER_VERSION})
+endif()
 
 # Remove -arch compute_50 -rdc=true on Ubuntu 16.04
-set( CUDA_NVCC_FLAGS_DEBUG -g -G -O0 -arch compute_50 -rdc=true )
-set( CUDA_NVCC_FLAGS_RELEASE -O3 -lineinfo -arch compute_50 -rdc=true )
-
+if (CUDA_VERSION VERSION_LESS 8.0)
+  set( CMAKE_CXX_FLAGS -D_FORCE_INLINES )
+  set( CUDA_NVCC_FLAGS_DEBUG -g -G -O0 -arch compute_50 -rdc=true )
+  set( CUDA_NVCC_FLAGS_RELEASE -O3 -lineinfo -arch compute_50 -rdc=true )
+else()
+  set( CUDA_SEPARABLE_COMPILATION ON )
+  set( CUDA_NVCC_FLAGS_DEBUG -g -G -O0 -arch compute_50 -rdc=true )
+  set( CUDA_NVCC_FLAGS_RELEASE -O3 -lineinfo -arch compute_50 -rdc=true )
+endif()
 
 ## 1. Compile...
 cuda_add_library( ${LIBRARY_NAME} ${MAIN_SOURCES}
